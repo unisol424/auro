@@ -2,24 +2,25 @@
     /*position: absolute;
     20170731-适配ngScorll调整左侧菜单为fixed定位*/
     position: fixed;
-    
+
     //height: 119px;
     width: 200px;
     top: 0;
     left: 0;
     min-height: 100%;
-    background: #2b354f;
+    background: #de0000;
     overflow-y: auto;
     .asch_nav {
-        background: #2b354f;;
         //height: 80px;
         display: block;
-
         .logo {
-            height: 60px;
+            height: 80px;
             width: 200px;
-            background: url("/assets/common/logo.png") center center no-repeat;
-            background-size: 80% auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
         }
         ul {
             /*width: 780px;*/
@@ -32,14 +33,9 @@
                 /*width: 105px;*/
                 width: 100%;
                 line-height: 60px;
-                //border-right: 1px solid #153863;
                 box-sizing: border-box;
                 margin: 0;
                 cursor: pointer;
-                &:first-child {
-                    border-left: 1px solid #153863;
-                }
-                ;
                 a {
                     padding-left: 30px;
                     display: block;
@@ -49,29 +45,28 @@
                     font-size: 18px;
                     text-align: left;
                     /*box-sizing: border-box;*/
-                    color: #fff!important;
+                    color: #fff !important;
                     text-decoration: none;
                     img {
                         width: 24px;
                         margin-right: 12px;
                     }
                 }
-
             }
-            .blockforging{
+            .blockforging {
                 position: relative;
-                .dropdown_menu{
+                .dropdown_menu {
                     width: 100%;
                     position: absolute;
                     top: 80px;
                     left: 0;
                     border: 1px solid #ddd;
                     z-index: 100;
-                    p{
+                    p {
                         line-height: 43px;
                         border-bottom: 1px solid #ddd;
                         background-color: #fff;
-                        font-size:16px;
+                        font-size: 16px;
                         color: #777;
                         margin: 0;
                         padding-left: 25px;
@@ -79,10 +74,10 @@
                         -moz-box-sizing: border-box;
                         box-sizing: border-box;
                         cursor: pointer;
-                        a{
-                            color: #777!important;
+                        a {
+                            color: #777 !important;
                         }
-                        &:last-child{
+                        &:last-child {
                             border-bottom: 0;
                         }
                     }
@@ -90,14 +85,13 @@
             }
 
             .active {
-                background: url(../../../assets/common/active_bg.png) no-repeat;
-                a{
-                 color: #28a0fd!important;   
+                background-color: #fefefe;
+                a {
+                    color: #de0000 !important;
                 }
             }
         }
     }
-
 }
 .asch_tip {
     width: 100%;
@@ -110,7 +104,7 @@
         position: relative;
         a {
             font-size: 24px;
-            color: #7a8697;
+            color: #c9c5c5;
             text-decoration: none;
             img {
                 width: 21px;
@@ -121,19 +115,19 @@
         }
         span {
             font-size: 18px;
-            color: #aebbcf!important;
+            color: #c9c5c5 !important;
         }
         .asch_tip_rights {
             position: absolute;
             right: 25px;
             line-height: 39px;
             font-size: 18px;
-            color:#777777;
+            color: #777777;
             a {
                 margin-left: 24px;
                 text-decoration: none;
                 line-height: 39px;
-                color: #3276c3;
+                color: #de0000;
             }
         }
     }

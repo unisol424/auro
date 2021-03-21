@@ -1,32 +1,47 @@
-<div  ng-include="'partials/common/crumb/crumb.html'"></div>
+<div ng-include="'partials/common/crumb/crumb.html'"></div>
 <div id="assetevaluation" ng-controller="assetevaluationCtrl" ng-init="">
-<div class="appheader">
-    <div class="titleitem"  ng-class=" {'active':assetpending}" ng-click="assetpendingchange()">{{'ASSET_REGISTER_PENDING' | translate}}</div>
-    <div class="titleitem"  ng-class=" {'active':publishpending}" ng-click="publishpendingchange()">{{'ASSET_PUBLISH_PENDING' | translate}}</div>
-    <div class="titleitem"  ng-class=" {'active':assetapproved}" ng-click="assetapprovedchange()">{{'ASSET_APPROVAL' | translate}}</div>
-</div>
+    <div class="appheader">
+        <div class="titleitem" ng-class=" {'active':assetpending}" ng-click="assetpendingchange()">
+            {{'ASSET_REGISTER_PENDING' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':publishpending}" ng-click="publishpendingchange()">
+            {{'ASSET_PUBLISH_PENDING' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':assetapproved}" ng-click="assetapprovedchange()">
+            {{'ASSET_APPROVAL' | translate}}
+        </div>
+    </div>
     <div class="content" ng-show="assetpending">
         <div class="innerheader">
             <span translate="TOTAL_PEOPLES" translate-values="{ count: assetpendingCount }"></span>
         </div>
         <div class="tablewrap">
-            <table class="table"ng-table="tableparams" border="0" width="100%" cellpadding="0" cellspacing="0"
-                   template-pagination="custom/pager" >
+            <table
+                class="table"
+                ng-table="tableparams"
+                border="0"
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                template-pagination="custom/pager"
+            >
                 <tr>
-					<th>{{'ASSET_CURRENCY' | translate}}</th>
-					<th>{{'ASSET_NAME' | translate}}</th>
-					<th>{{'ASSET_CATEGORY_CODE' | translate}}</th>
-					<th>{{'ASSET_TOTAL' | translate}}</th>
-					<th>{{'VOTE_DETAIL' | translate}}</th>
-					<th>{{'ASSET_ESTIMATE_VALUE' | translate}}</th>
-					<th>{{'VOTE' | translate}}</th>
-				</tr>
-                <tr ng-repeat="i in $data"  >
+                    <th>{{'ASSET_CURRENCY' | translate}}</th>
+                    <th>{{'ASSET_NAME' | translate}}</th>
+                    <th>{{'ASSET_CATEGORY_CODE' | translate}}</th>
+                    <th>{{'ASSET_TOTAL' | translate}}</th>
+                    <th>{{'VOTE_DETAIL' | translate}}</th>
+                    <th>{{'ASSET_ESTIMATE_VALUE' | translate}}</th>
+                    <th>{{'VOTE' | translate}}</th>
+                </tr>
+                <tr ng-repeat="i in $data">
                     <td><i class="level" ng-click="showassetdetailInfo(i.currency)">{{i.currency }}</i></td>
                     <td>{{i.name}}</td>
-					<td>{{i.category}}</td>
+                    <td>{{i.category}}</td>
                     <td>{{i.maximum}}</td>
-                    <td><i class="level" ng-click="showassetvoterInfo(i.currency)">{{'VOTE_DETAIL' | translate}}</i></td>
+                    <td>
+                        <i class="level" ng-click="showassetvoterInfo(i.currency)">{{'VOTE_DETAIL' | translate}}</i>
+                    </td>
                     <td>{{i.estimatePrice}}/{{i.estimateUnit}}</td>
                     <!--<td><button ng-disabled="i.btndisable" ng-class="{'active':i.btndisable}" ng-click="notallowed(i)">{{'VOTE' | translate}}</button></td>-->
                     <td><button ng-click="votetoapply(i.currency)">{{'VOTE' | translate}}</button></td>
@@ -39,26 +54,37 @@
             <span translate="TOTAL_PEOPLES" translate-values="{ count:publishpendingCount }"></span>
         </div>
         <div class="tablewrap">
-            <table class="table"ng-table="tableparams1" border="0" width="100%" cellpadding="0" cellspacing="0"
-                   template-pagination="custom/pager" >
+            <table
+                class="table"
+                ng-table="tableparams1"
+                border="0"
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                template-pagination="custom/pager"
+            >
                 <tr>
-					<th>{{'ASSET_CURRENCY' | translate}}</th>
-					<th>{{'PUBLISH_TRANSACTION_ID' | translate}}</th>
-					<th>{{'EXCHANGE_RATE' | translate}}</th>
-					<th>{{'PUBLISHED_NUM' | translate}}</th>
-					<th>{{'VOTE_DETAIL' | translate}}</th>
-					<th>{{'SENDER' | translate}}</th>
-					<th>{{'VOTE' | translate}}</th>
-				</tr>
-                <tr ng-repeat="i in $data"  >
-                	<td>{{i.currency }}</td>
+                    <th>{{'ASSET_CURRENCY' | translate}}</th>
+                    <th>{{'PUBLISH_TRANSACTION_ID' | translate}}</th>
+                    <th>{{'EXCHANGE_RATE' | translate}}</th>
+                    <th>{{'PUBLISHED_NUM' | translate}}</th>
+                    <th>{{'VOTE_DETAIL' | translate}}</th>
+                    <th>{{'SENDER' | translate}}</th>
+                    <th>{{'VOTE' | translate}}</th>
+                </tr>
+                <tr ng-repeat="i in $data">
+                    <td>{{i.currency }}</td>
                     <td>{{i.transactionId}}</td>
-					<td>{{i.exchangeRate}}</td>
+                    <td>{{i.exchangeRate}}</td>
                     <td>{{i.amount}}</td>
-                    <td><i class="level" ng-click="showpublishvoterInfo(i.transactionId)">{{'VOTE_DETAIL' | translate}}</i></td>
+                    <td>
+                        <i class="level" ng-click="showpublishvoterInfo(i.transactionId)"
+                            >{{'VOTE_DETAIL' | translate}}</i
+                        >
+                    </td>
                     <td><i class="level" ng-click="showpendingissuerInfo(i.senderId)">{{i.senderId}}</i></td>
                     <!--<td><button ng-disabled="i.btndisable" ng-class="{'active':i.btndisable}" ng-click="notallowed(i)">{{'VOTE' | translate}}</button></td>-->
-                    <td><button ng-click="votetopublish(i.transactionId)">{{'VOTE' | translate}}</button></td>    
+                    <td><button ng-click="votetopublish(i.transactionId)">{{'VOTE' | translate}}</button></td>
                 </tr>
             </table>
         </div>
@@ -69,25 +95,34 @@
             <span translate="TOTAL_PEOPLES" translate-values="{ count: assetapprovedCount }"></span>
         </div>
         <div class="tablewrap">
-            <table class="table"ng-table="tableparams2" border="0" width="100%" cellpadding="0" cellspacing="0"
-                   template-pagination="custom/pager" >
+            <table
+                class="table"
+                ng-table="tableparams2"
+                border="0"
+                width="100%"
+                cellpadding="0"
+                cellspacing="0"
+                template-pagination="custom/pager"
+            >
                 <tr>
-					<th>{{'ASSET_CURRENCY' | translate}}</th>
-					<th>{{'ASSET_NAME' | translate}}</th>
-					<th>{{'ASSET_CATEGORY_CODE' | translate}}</th>
-					<th>{{'PUBLISHED_NUM' | translate}}</th>
-					<th>{{'ASSET_TOTAL' | translate}}</th>
-					<th>{{'VOTE_DETAIL' | translate}}</th>
-					<th>{{'ASSET_ESTIMATE_VALUE' | translate}}</th>
-					<th>{{'VOTE' | translate}}</th>
-				</tr>
-                <tr ng-repeat="i in $data"  >
+                    <th>{{'ASSET_CURRENCY' | translate}}</th>
+                    <th>{{'ASSET_NAME' | translate}}</th>
+                    <th>{{'ASSET_CATEGORY_CODE' | translate}}</th>
+                    <th>{{'PUBLISHED_NUM' | translate}}</th>
+                    <th>{{'ASSET_TOTAL' | translate}}</th>
+                    <th>{{'VOTE_DETAIL' | translate}}</th>
+                    <th>{{'ASSET_ESTIMATE_VALUE' | translate}}</th>
+                    <th>{{'VOTE' | translate}}</th>
+                </tr>
+                <tr ng-repeat="i in $data">
                     <td><i class="level" ng-click="showassetdetailInfo(i.currency)">{{i.currency }}</i></td>
                     <td>{{i.name}}</td>
-					<td>{{i.category}}</td>
+                    <td>{{i.category}}</td>
                     <td>{{i.quantity}}</td>
                     <td>{{i.maximum}}</td>
-                    <td><i class="level" ng-click="showassetvoterInfo(i.currency)">{{'VOTE_DETAIL' | translate}}</i></td>
+                    <td>
+                        <i class="level" ng-click="showassetvoterInfo(i.currency)">{{'VOTE_DETAIL' | translate}}</i>
+                    </td>
                     <td>{{i.estimatePrice}}/{{i.estimateUnit}}</td>
                     <td><i>{{'ASSET_APPROVAL' | translate}}</i></td>
                 </tr>
@@ -117,12 +152,16 @@
         </ul>
     </script>
     <div id="pendingvote" ng-show="voteDialog">
-        <a class="close" href="" ng-click="pendingvoteClose()"><img src="/assets/common/close.png" alt=""></a>
-        <p ng-show="dialogNUM == 1">{{'PENDING_VOTETO_1' | translate}} {{votecurrency}}, {{'OPERATION_IRREVERSIBLE' | translate}} 1 ACC</p>
-        <p ng-show="dialogNUM == 2">{{'PENDING_VOTETO_1' | translate}} {{votetransaction}}, {{'OPERATION_IRREVERSIBLE' | translate}} 1 ACC</p>
+        <a class="close" href="" ng-click="pendingvoteClose()"><img src="/assets/common/close.png" alt="" /></a>
+        <p ng-show="dialogNUM == 1">
+            {{'PENDING_VOTETO_1' | translate}} {{votecurrency}}, {{'OPERATION_IRREVERSIBLE' | translate}} 1 ORO
+        </p>
+        <p ng-show="dialogNUM == 2">
+            {{'PENDING_VOTETO_1' | translate}} {{votetransaction}}, {{'OPERATION_IRREVERSIBLE' | translate}} 1 ORO
+        </p>
         <div class="_item" ng-show="secpwd">
-            <label >{{'SECOND_PASSWORD' | translate}}</label>
-            <input type="password"  ng-model="votesecondPassword" >
+            <label>{{'SECOND_PASSWORD' | translate}}</label>
+            <input type="password" ng-model="votesecondPassword" />
         </div>
         <button class="sent" ng-click="vote_submit()">{{'SUBMIT' | translate}}</button>
     </div>

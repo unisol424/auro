@@ -1,29 +1,45 @@
-<div  ng-include="'partials/common/crumb/crumb.html'"></div>
+<div ng-include="'partials/common/crumb/crumb.html'"></div>
 <div id="asset" ng-controller="assetCtrl" ng-init="init()">
-
     <div class="appheader">
-        <div class="titleitem"  ng-class=" {'active':assetprofile}" ng-click="assetprofilechange()">{{'ASSET_PROFILE' | translate}}</div>
-        <div class="titleitem"  ng-class=" {'active':registerpublish}" ng-click="registerpublishchange()">{{'REGISTERED_PUBLISHER' | translate}}</div>
-        <div class="titleitem"  ng-class=" {'active':registerasset}" ng-click="registerAssetchange()">{{'REGISTERED_ASSETS' | translate}}</div>
-        <div class="titleitem"  ng-class=" {'active':myAssets}" ng-click="myAssetschange()">{{'MY_ASSETS' | translate}}</div>
-        <div class="titleitem"  ng-class=" {'active':chainAssets}" ng-click="chainAssetschange()">{{'CHAIN_ASSETS' | translate}}</div>
+        <div class="titleitem" ng-class=" {'active':assetprofile}" ng-click="assetprofilechange()">
+            {{'ASSET_PROFILE' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':registerpublish}" ng-click="registerpublishchange()">
+            {{'REGISTERED_PUBLISHER' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':registerasset}" ng-click="registerAssetchange()">
+            {{'REGISTERED_ASSETS' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':myAssets}" ng-click="myAssetschange()">
+            {{'MY_ASSETS' | translate}}
+        </div>
+        <div class="titleitem" ng-class=" {'active':chainAssets}" ng-click="chainAssetschange()">
+            {{'CHAIN_ASSETS' | translate}}
+        </div>
         <!--<div class="titleitem"  ng-class=" {'active':operationRecord}" ng-click="operationRecordchange()">{{'OPERATION_RECORD' | translate}}</div>-->
     </div>
     <div class="content first deal_table" ng-show="assetprofile">
-        <table class="table" ng-table="assetprofiletableparams" border="0" width="100%" cellpadding="0" cellspacing="0"
-               template-pagination="custom/pager" >
-             <thread>
+        <table
+            class="table"
+            ng-table="assetprofiletableparams"
+            border="0"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            template-pagination="custom/pager"
+        >
+            <thread>
                 <tr>
                     <th>{{'ASSET_CURRENCY' | translate}}</th>
-					<th>{{'ASSET_NAME' | translate}}</th>
-					<th>{{'BALANCE' | translate}}</th>
-					<th>{{'PRECISION' | translate}}</th>
-					<th>{{'PUBLISHED_TOTAL' | translate}}</th>
+                    <th>{{'ASSET_NAME' | translate}}</th>
+                    <th>{{'BALANCE' | translate}}</th>
+                    <th>{{'PRECISION' | translate}}</th>
+                    <th>{{'PUBLISHED_TOTAL' | translate}}</th>
                     <!--<th>{{'ALLOW_WWB' | translate}}</th>-->
                     <th>{{'OPERATION' | translate}}</th>
                 </tr>
             </thread>
-            <tr ng-repeat="i in $data"  >
+            <tr ng-repeat="i in $data">
                 <td>{{i.currency}}</td>
                 <td>{{i.name}}</td>
                 <td>{{i.balance}}</td>
@@ -33,152 +49,214 @@
                 <td><a class="hand" ng-click="transferView(i,1)">{{'TRANSFER' | translate}}</a></td>
             </tr>
         </table>
-
     </div>
     <div class="content first padding25" ng-show="registerpublish">
         <p class="title" ng-show="issuerStatus">{{'ISSUER_REG_COMPLETED' | translate}}</p>
-		<div class="_item">
-            <label >{{'DAPP_NAME' | translate}}</label>
-            <input type="text" ng-disabled="issuerStatus" maxlength="16" ng-model="monname" id="pay_item1" placeholder="{{'UPPERCASE_NO_MORE_THAN_16' | translate}}" >
+        <div class="_item">
+            <label>{{'DAPP_NAME' | translate}}</label>
+            <input
+                type="text"
+                ng-disabled="issuerStatus"
+                maxlength="16"
+                ng-model="monname"
+                id="pay_item1"
+                placeholder="{{'UPPERCASE_NO_MORE_THAN_16' | translate}}"
+            />
         </div>
         <div class="_item">
-            <label >{{'DESCRIBE' | translate}}</label>
-            <textarea  required ng-disabled="issuerStatus"  ng-model="mondesc" id="pay_item2"></textarea>
-
+            <label>{{'DESCRIBE' | translate}}</label>
+            <textarea required ng-disabled="issuerStatus" ng-model="mondesc" id="pay_item2"></textarea>
         </div>
         <div class="_item" ng-show="secpwd">
-            <label >{{'SECOND_PASSWORD' | translate}}</label>
-            <input type="password" ng-disabled="issuerStatus" ng-model="rpsecondPassword" >
+            <label>{{'SECOND_PASSWORD' | translate}}</label>
+            <input type="password" ng-disabled="issuerStatus" ng-model="rpsecondPassword" />
         </div>
         <button class="sent" ng-show="!issuerStatus" ng-click="registerPublish()">{{'SUBMIT' | translate}}</button>
     </div>
     <div class="content third padding25" ng-show="registerasset">
-    	<div class="registerasset_title">
-    		<div class="registerasset_focus">{{'ASSET_NAME' | translate}}</div>
-    	</div>
-    	<div class="asset_name">
-    		<div class="_item">
-	            <label >{{'DAPP_NAME' | translate}}</label>
-	            <input type="text"  ng-model="publishName" ng-blur="verifyPublishName()">
-	        </div>
-	        <div class="_item">
-	            <label >{{'ASSET_CURRENCY' | translate}}</label>
-	            <input type="text"  ng-model="currencySet" placeholder="{{'UPPERCASE_UP_TO_10' | translate}}" ng-blur="verifyCurrencySet()" maxlength="10" >
-	        </div>
-	        <div class="_item">
-	            <label >{{'ESTIMATE_PRICE' | translate}}</label>
-	            <input type="text"  ng-model="estimatePrice" placeholder="{{'ESTIMATE_PRICE_LIMIT' | translate}}" ng-blur="verifyEstimatePrice()" maxlength="12">
-	        </div>
-	        <div class="_item">
-	            <label >{{'ESTIMATE_UNIT' | translate}}</label>
-	            <select ng-model="estimateUnit" ng-options="i for i in estimateUnitRange"></select>
-	        </div>
-	         <div class="_item">
-	            <label >{{'UNLOCK_CONDITION' | translate}}</label>
-	            <select ng-model="unlockCondition" ng-options="i.label for i in unlockConditionRange"></select>
-	        </div>
-	        <div class="_item">
-	            <label >{{'EXERCISE_UNIT' | translate}}</label>
-	            <input type="text"  ng-model="exerciseUnit" placeholder="{{'INTEGER_NO_MORE_THAN_9' | translate}}" ng-change="verifyExerciseUnit()" maxlength="9">
-	        </div>
-	        <div class="_item">
-	            <label >{{'CHAIN_OR_NOT' | translate}}</label>
-	            <input type="checkbox"  ng-model="chainCheck" >
-	        </div>
-	        <div class="_item">
-	            <label >{{'DESCRIBE' | translate}}</label>
-	            <textarea  required ng-model="publishDesc" ng-blur="verifyPublishDesc()"></textarea>
-			</div>
-    	</div>
-    	<div class="registerasset_title">
-    		<div class="registerasset_focus">{{'ASSET_CATEGORY' | translate}}</div>
-    	</div>
-    	<div class="clearfix asset_category">
-    		<div class="item">
-	            <label >{{'LEVEL_ONE' | translate}}</label>
-	            <select ng-change="selectonechange(selectedLevelOne)" ng-model="selectedLevelOne" ng-options="i.attrs[chosenLang] for i in assetCategoryLevelOne"></select>
-	        </div>
-	        <div class="item">
-	            <label >{{'LEVEL_TWO' | translate}}</label>
-	            <select ng-change="selecttwochange(selectedLevelTwo)" ng-model="selectedLevelTwo" ng-options="i.attrs[chosenLang] for i in assetCategoryLevelTwo"></select>
-	        </div>
-	        <div class="item">
-	            <label >{{'LEVEL_THREE' | translate}}</label>
-	            <select ng-change="selectthreechange(selectedLevelThree)"  ng-model="selectedLevelThree" ng-options="i.attrs[chosenLang] for i in assetCategoryLevelThree"></select>
-	        </div>
-	        <div class="item">
-	            <label >{{'LEVEL_FOUR' | translate}}</label>
-	            <select ng-change="selectfourchange(selectedLevelFour)" ng-model="selectedLevelFour" ng-options="i.attrs[chosenLang] for i in assetCategoryLevelFour"></select>
-	        </div>
-	        <div class="item">
-	            <label >{{'LEVEL_FIVE' | translate}}</label>
-	            <select  ng-model="selectedLevelFive" ng-options="i.attrs[chosenLang] for i in assetCategoryLevelFive"></select>
-	        </div>
-    	</div>
-    	<div class="registerasset_title">
-    		<div class="registerasset_focus">{{'ASSET_INFORMATION' | translate}}</div>
-    	</div>
-    	<div class="asset_information">
-    		<div class="item">
-    			<label>{{'PRODUCT_BRAND' | translate}}</label>
-    			<input type="text" ng-model="productBrand" />
-    			<input type="text" ng-model="productBrandRemark" placeholder="{{'REMARK' | translate}}"/>
-    			<input type="text" ng-model="productBrandLink" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    		<div class="item">
-    			<label>{{'PACKING_STANDARD' | translate}}</label>
-    			<input type="text" ng-model="packingStandard" />
-    			<input type="text" ng-model="packingStandardRemark" placeholder="{{'REMARK' | translate}}"/>
-    			<input type="text" ng-model="packingStandardLink" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    		<div class="item">
-    			<label>{{'PRODUCT_INDEX' | translate}}</label>
-    			<input type="text" ng-model="productIndex" />
-    			<input type="text" ng-model="productIndexRemark" placeholder="{{'REMARK' | translate}}"/>
-    			<input type="text" ng-model="productIndexLink" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    		<div class="item">
-    			<label>{{'PRODUCTION_INFO' | translate}}</label>
-    			<input type="text" ng-model="productionInfo" />
-    			<input type="text" ng-model="productionInfoRemark" placeholder="{{'REMARK' | translate}}"/>
-    			<input type="text" ng-model="productionInfoLink" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    		<div class="item">
-    			<label>{{'OTHER_INFO' | translate}}</label>
-    			<input type="text" ng-model="otherInfo" />
-    			<input type="text" ng-model="otherInfoRemark" placeholder="{{'REMARK' | translate}}"/>
-    			<input type="text" ng-model="otherInfoLink" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    		<div class="item">
-    			<label>{{'MORE_DETAILS' | translate}}</label>
-    			<input type="text" ng-model="moreDetails" placeholder="{{'LINK' | translate}}"/>
-    		</div>
-    	</div>
-    	<div class="registerasset_title">
-    		<div class="registerasset_focus">{{'PUBLISHED_NUM' | translate}}</div>
-    	</div>
-    	<div class="clearfix published_num">
-    		<div class="published_num_left">
-    			<div class="_item">
-		            <label >{{'MAXIMUM' | translate}}</label>
-		            <input type="text" ng-model="topLimt" placeholder="{{'INTEGER_NO_MORE_THAN_12' | translate}}" ng-change="verifyTopLimt()" maxlength="12">
-		        </div>
-		        <div class="_item">
-		            <label >{{'ACCURACY' | translate}}</label>
-		            <input type="text"  ng-model="precision" placeholder="{{'INTEGER_UP_TO_6' | translate}}" ng-change="verifyPrecision()" maxlength="1">
-		        </div>
-		        <div class="_item" ng-show="secpwd">
-		            <label >{{'SECOND_PASSWORD' | translate}}</label>
-		            <input type="password"  ng-model="regAssetSecondPassword" >
-		        </div>
-		        <button class="sent" ng-click="registerAsset()">{{'SUBMIT' | translate}}</button>
-			</div>
-    	</div>
+        <div class="registerasset_title">
+            <div class="registerasset_focus">{{'ASSET_NAME' | translate}}</div>
+        </div>
+        <div class="asset_name">
+            <div class="_item">
+                <label>{{'DAPP_NAME' | translate}}</label>
+                <input type="text" ng-model="publishName" ng-blur="verifyPublishName()" />
+            </div>
+            <div class="_item">
+                <label>{{'ASSET_CURRENCY' | translate}}</label>
+                <input
+                    type="text"
+                    ng-model="currencySet"
+                    placeholder="{{'UPPERCASE_UP_TO_10' | translate}}"
+                    ng-blur="verifyCurrencySet()"
+                    maxlength="10"
+                />
+            </div>
+            <div class="_item">
+                <label>{{'ESTIMATE_PRICE' | translate}}</label>
+                <input
+                    type="text"
+                    ng-model="estimatePrice"
+                    placeholder="{{'ESTIMATE_PRICE_LIMIT' | translate}}"
+                    ng-blur="verifyEstimatePrice()"
+                    maxlength="12"
+                />
+            </div>
+            <div class="_item">
+                <label>{{'ESTIMATE_UNIT' | translate}}</label>
+                <select ng-model="estimateUnit" ng-options="i for i in estimateUnitRange"></select>
+            </div>
+            <div class="_item">
+                <label>{{'UNLOCK_CONDITION' | translate}}</label>
+                <select ng-model="unlockCondition" ng-options="i.label for i in unlockConditionRange"></select>
+            </div>
+            <div class="_item">
+                <label>{{'EXERCISE_UNIT' | translate}}</label>
+                <input
+                    type="text"
+                    ng-model="exerciseUnit"
+                    placeholder="{{'INTEGER_NO_MORE_THAN_9' | translate}}"
+                    ng-change="verifyExerciseUnit()"
+                    maxlength="9"
+                />
+            </div>
+            <div class="_item">
+                <label>{{'CHAIN_OR_NOT' | translate}}</label>
+                <input type="checkbox" ng-model="chainCheck" />
+            </div>
+            <div class="_item">
+                <label>{{'DESCRIBE' | translate}}</label>
+                <textarea required ng-model="publishDesc" ng-blur="verifyPublishDesc()"></textarea>
+            </div>
+        </div>
+        <div class="registerasset_title">
+            <div class="registerasset_focus">{{'ASSET_CATEGORY' | translate}}</div>
+        </div>
+        <div class="clearfix asset_category">
+            <div class="item">
+                <label>{{'LEVEL_ONE' | translate}}</label>
+                <select
+                    ng-change="selectonechange(selectedLevelOne)"
+                    ng-model="selectedLevelOne"
+                    ng-options="i.attrs[chosenLang] for i in assetCategoryLevelOne"
+                ></select>
+            </div>
+            <div class="item">
+                <label>{{'LEVEL_TWO' | translate}}</label>
+                <select
+                    ng-change="selecttwochange(selectedLevelTwo)"
+                    ng-model="selectedLevelTwo"
+                    ng-options="i.attrs[chosenLang] for i in assetCategoryLevelTwo"
+                ></select>
+            </div>
+            <div class="item">
+                <label>{{'LEVEL_THREE' | translate}}</label>
+                <select
+                    ng-change="selectthreechange(selectedLevelThree)"
+                    ng-model="selectedLevelThree"
+                    ng-options="i.attrs[chosenLang] for i in assetCategoryLevelThree"
+                ></select>
+            </div>
+            <div class="item">
+                <label>{{'LEVEL_FOUR' | translate}}</label>
+                <select
+                    ng-change="selectfourchange(selectedLevelFour)"
+                    ng-model="selectedLevelFour"
+                    ng-options="i.attrs[chosenLang] for i in assetCategoryLevelFour"
+                ></select>
+            </div>
+            <div class="item">
+                <label>{{'LEVEL_FIVE' | translate}}</label>
+                <select
+                    ng-model="selectedLevelFive"
+                    ng-options="i.attrs[chosenLang] for i in assetCategoryLevelFive"
+                ></select>
+            </div>
+        </div>
+        <div class="registerasset_title">
+            <div class="registerasset_focus">{{'ASSET_INFORMATION' | translate}}</div>
+        </div>
+        <div class="asset_information">
+            <div class="item">
+                <label>{{'PRODUCT_BRAND' | translate}}</label>
+                <input type="text" ng-model="productBrand" />
+                <input type="text" ng-model="productBrandRemark" placeholder="{{'REMARK' | translate}}" />
+                <input type="text" ng-model="productBrandLink" placeholder="{{'LINK' | translate}}" />
+            </div>
+            <div class="item">
+                <label>{{'PACKING_STANDARD' | translate}}</label>
+                <input type="text" ng-model="packingStandard" />
+                <input type="text" ng-model="packingStandardRemark" placeholder="{{'REMARK' | translate}}" />
+                <input type="text" ng-model="packingStandardLink" placeholder="{{'LINK' | translate}}" />
+            </div>
+            <div class="item">
+                <label>{{'PRODUCT_INDEX' | translate}}</label>
+                <input type="text" ng-model="productIndex" />
+                <input type="text" ng-model="productIndexRemark" placeholder="{{'REMARK' | translate}}" />
+                <input type="text" ng-model="productIndexLink" placeholder="{{'LINK' | translate}}" />
+            </div>
+            <div class="item">
+                <label>{{'PRODUCTION_INFO' | translate}}</label>
+                <input type="text" ng-model="productionInfo" />
+                <input type="text" ng-model="productionInfoRemark" placeholder="{{'REMARK' | translate}}" />
+                <input type="text" ng-model="productionInfoLink" placeholder="{{'LINK' | translate}}" />
+            </div>
+            <div class="item">
+                <label>{{'OTHER_INFO' | translate}}</label>
+                <input type="text" ng-model="otherInfo" />
+                <input type="text" ng-model="otherInfoRemark" placeholder="{{'REMARK' | translate}}" />
+                <input type="text" ng-model="otherInfoLink" placeholder="{{'LINK' | translate}}" />
+            </div>
+            <div class="item">
+                <label>{{'MORE_DETAILS' | translate}}</label>
+                <input type="text" ng-model="moreDetails" placeholder="{{'LINK' | translate}}" />
+            </div>
+        </div>
+        <div class="registerasset_title">
+            <div class="registerasset_focus">{{'PUBLISHED_NUM' | translate}}</div>
+        </div>
+        <div class="clearfix published_num">
+            <div class="published_num_left">
+                <div class="_item">
+                    <label>{{'MAXIMUM' | translate}}</label>
+                    <input
+                        type="text"
+                        ng-model="topLimt"
+                        placeholder="{{'INTEGER_NO_MORE_THAN_12' | translate}}"
+                        ng-change="verifyTopLimt()"
+                        maxlength="12"
+                    />
+                </div>
+                <div class="_item">
+                    <label>{{'ACCURACY' | translate}}</label>
+                    <input
+                        type="text"
+                        ng-model="precision"
+                        placeholder="{{'INTEGER_UP_TO_6' | translate}}"
+                        ng-change="verifyPrecision()"
+                        maxlength="1"
+                    />
+                </div>
+                <div class="_item" ng-show="secpwd">
+                    <label>{{'SECOND_PASSWORD' | translate}}</label>
+                    <input type="password" ng-model="regAssetSecondPassword" />
+                </div>
+                <button class="sent" ng-click="registerAsset()">{{'SUBMIT' | translate}}</button>
+            </div>
+        </div>
     </div>
     <div class="content third myAssets" ng-show="myAssets">
         <p class="title" ng-show="!issuerStatus">{{'NO_ASSET_INFO' | translate}}</p>
-        <table ng-show="issuerStatus"class="table" ng-table="myAss" border="0" width="100%" cellpadding="0" cellspacing="0"
-               template-pagination="custom/pager" >
+        <table
+            ng-show="issuerStatus"
+            class="table"
+            ng-table="myAss"
+            border="0"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            template-pagination="custom/pager"
+        >
             <thread>
                 <tr>
                     <th>{{'ASSET_CURRENCY' | translate}}</th>
@@ -190,8 +268,8 @@
                     <th>{{'OPERATION' | translate}}</th>
                 </tr>
             </thread>
-            <tr ng-repeat="i in $data"  >
-                <td> {{i.currency}}</td>
+            <tr ng-repeat="i in $data">
+                <td>{{i.currency}}</td>
                 <td>{{i.maximum}}</td>
                 <td>{{i.precision}}</td>
                 <td>{{i.quantity}}</td>
@@ -207,12 +285,19 @@
                 </td>
             </tr>
         </table>
-        
     </div>
     <div class="content chainAssets" ng-show="chainAssets">
         <p class="title" ng-show="!issuerStatus">{{'PLEASE_REGISTER_ISSUER' | translate}}</p>
-        <table ng-show="issuerStatus"class="table" ng-table="chainAss" border="0" width="100%" cellpadding="0" cellspacing="0"
-               template-pagination="custom/pager" >
+        <table
+            ng-show="issuerStatus"
+            class="table"
+            ng-table="chainAss"
+            border="0"
+            width="100%"
+            cellpadding="0"
+            cellspacing="0"
+            template-pagination="custom/pager"
+        >
             <thread>
                 <tr>
                     <th>{{'ASSET_CURRENCY' | translate}}</th>
@@ -222,8 +307,8 @@
                     <th>{{'OPERATION' | translate}}</th>
                 </tr>
             </thread>
-            <tr ng-repeat="i in $data"  >
-                <td> {{i.currency}}</td>
+            <tr ng-repeat="i in $data">
+                <td>{{i.currency}}</td>
                 <td>{{i.maximum}}</td>
                 <td>{{i.precision}}</td>
                 <td>{{i.quantity}}</td>
@@ -266,14 +351,14 @@
         </ul>
     </script>
     <div id="comfirmDialog" ng-show="comfirmDialog">
-        <p ng-show="dialogNUM == 1">{{'CONFIRM_DIALOG_TEXT' | translate}} {{ publishtrs.fee | xasFilter}} ACC</p>
-        <p ng-show="dialogNUM == 2">{{'CONFIRM_DIALOG_TEXT' | translate}} {{ assetTrs.fee | xasFilter}} ACC</p>
+        <p ng-show="dialogNUM == 1">{{'CONFIRM_DIALOG_TEXT' | translate}} {{ publishtrs.fee | xasFilter}} ORO</p>
+        <p ng-show="dialogNUM == 2">{{'CONFIRM_DIALOG_TEXT' | translate}} {{ assetTrs.fee | xasFilter}} ORO</p>
         <button class="sent" ng-click="comfirmDialogClose()">{{'CANCEL' | translate}}</button>
         <button class="sent" ng-click="comfirmSub()">{{'CONFIRM' | translate}}</button>
     </div>
     <!--<div id="writeoff" ng-show="myAss.writeoff">
         <a class="close" href="" ng-click="writeoffClose()"><img src="/assets/common/close.png" alt=""></a>
-        <p>您正在注销{{moneyName}}资产，该操作不可逆，需要消耗手续费0.1 ACC</p>
+        <p>您正在注销{{moneyName}}资产，该操作不可逆，需要消耗手续费0.1 ORO</p>
         <div class="_item" ng-show="secpwd">
             <label >{{'SECOND_PASSWORD' | translate}}</label>
             <input type="password" ng-model="wosecondPassword" >
@@ -281,25 +366,28 @@
         <button class="sent" ng-click="writeoff_submit()">{{'SUBMIT' | translate}}</button>
     </div>-->
     <div id="publish" ng-show="assPublish">
-        <a class="close" href="" ng-click="publishClose()"><img src="/assets/common/close.png" alt=""></a>
-        <p>{{'PUBLISH_ASSET_OPERATION_1' | translate}} {{myPublishmoneyName}}, {{'OPERATION_IRREVERSIBLE' | translate}} 100 ACC</p>
+        <a class="close" href="" ng-click="publishClose()"><img src="/assets/common/close.png" alt="" /></a>
+        <p>
+            {{'PUBLISH_ASSET_OPERATION_1' | translate}} {{myPublishmoneyName}}, {{'OPERATION_IRREVERSIBLE' | translate}}
+            100 ORO
+        </p>
         <div class="_item">
-            <label >{{'ISSUE_NUMBER' | translate}}</label>
-            <input type="text" ng-model="amount" >
+            <label>{{'ISSUE_NUMBER' | translate}}</label>
+            <input type="text" ng-model="amount" />
         </div>
         <div class="_item">
-            <label >{{'EXCHANGE_RATE' | translate}}</label>
-            <input type="text" ng-model="exchangeRate" >
+            <label>{{'EXCHANGE_RATE' | translate}}</label>
+            <input type="text" ng-model="exchangeRate" />
         </div>
         <div class="_item" ng-show="secpwd">
-            <label >{{'SECOND_PASSWORD' | translate}}</label>
-            <input type="password"  ng-model="pbsecondPassword" >
+            <label>{{'SECOND_PASSWORD' | translate}}</label>
+            <input type="password" ng-model="pbsecondPassword" />
         </div>
         <button class="sent" ng-click="publish_submit()">{{'SUBMIT' | translate}}</button>
     </div>
     <!--<div id="settings" ng-show="myAss.set">
         <a class="close" href="" ng-click="settingsClose()"><img src="/assets/common/close.png" alt=""></a>
-        <p>你正在执行{{moneyName}}资产设置操作，需要消耗0.1 ACC</p>
+        <p>你正在执行{{moneyName}}资产设置操作，需要消耗0.1 ORO</p>
         <div class="_item">
             <label >{{'TYPE' | translate}}</label>
             <input type="text" value="ACL"  disabled>
